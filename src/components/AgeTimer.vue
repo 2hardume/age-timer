@@ -7,15 +7,6 @@ const toggleVisibility = () => {
 };
 
 const birthday = ref('')
-
-if (localStorage.birthday) {
-  birthday.value = localStorage.birthday
-
-  if (birthday.value.length > 0) {
-    toggleVisibility()
-  }
-}
-
 const timer = reactive({year: 0, ms: 0})
 
 const saveBirthday = () => {
@@ -56,7 +47,16 @@ const updateDiff = () => {
 let intervalId
 
 onMounted(() => {  
+  if (localStorage.birthday) {
+    birthday.value = localStorage.birthday
+
+    if (birthday.value.length > 0) {
+      toggleVisibility()
+    }
+  }
+
   intervalId = setInterval(updateDiff, 100)
+  
   updateDiff()
 })
 
